@@ -1,0 +1,61 @@
+
+
+create database projeto_reservas;
+
+use projeto_Reservas;
+
+create table if not exists usuario(
+    id_usuario int primary key auto_increment,
+    nome varchar(50) not null,
+    email varchar(50) not null unique,
+    cpf varchar(50)not null unique,
+    senha varchar(50) not null
+);
+
+
+create table if not exists sala(
+    id_sala int primary key auto_increment,
+    nomesala varchar(255) unique not null,
+    bloco varchar(50) not null,
+    capacidade int not null,
+    descricao varchar(255) not null
+
+);
+
+create table if not exists reserva(
+id_reserva int auto_increment primary key,
+fk_id_sala int not null,
+fk_id_usuario int not null,
+datahora_inicio datetime not null,
+datahora_fim datetime not null,
+foreign key (fk_id_sala) references sala(id_sala),
+foreign key (fk_id_usuario) references usuario(id_usuario)
+);
+
+INSERT INTO usuario (nome, email, senha, cpf) VALUES
+('João Silva', 'joao.silva@example.com', 'senha123', '3456789'),
+('Maria Oliveira', 'maria.oliveira@example.com', 'senha123', '7654321'),
+('Carlos Pereira', 'carlos.pereira@example.com', 'senha123', '3987456'),
+('Ana Souza', 'ana.souza@example.com', 'senha123', '6123789'),
+('Pedro Costa', 'pedro.costa@example.com', 'senha123', '9123456'),
+('Laura Lima', 'laura.lima@example.com', 'senha123', '1654987'),
+('Lucas Alves', 'lucas.alves@example.com', 'senha123', '4321987'),
+('Fernanda Rocha', 'fernanda.rocha@example.com', 'senha123', '1852963'),
+('Rafael Martins', 'rafael.martins@example.com', 'senha123', '9258147'),
+('Juliana Nunes', 'juliana.nunes@example.com', 'senha123', '8147369'),
+('Paulo Araujo', 'paulo.araujo@example.com', 'senha123', '9753486'),
+('Beatriz Melo', 'beatriz.melo@example.com', 'senha123', '6159753'),
+('Renato Dias', 'renato.dias@example.com', 'senha123', '3486159'),
+('Camila Ribeiro', 'camila.ribeiro@example.com', 'senha123', '3852741'),
+('Thiago Teixeira', 'thiago.teixeira@example.com', 'senha123', '2741963'),
+('Patrícia Fernandes', 'patricia.fernandes@example.com', 'senha123', '1963852'),
+('Rodrigo Gomes', 'rodrigo.gomes@example.com', 'senha123', '3741852'),
+('Mariana Batista', 'mariana.batista@example.com', 'senha123', '7258369'),
+('Fábio Freitas', 'fabio.freitas@example.com', 'senha123', '9147258'),
+('Isabela Cardoso', 'isabela.cardoso@example.com', 'senha123', '8369147');
+
+INSERT INTO sala(nomesala, bloco, descricao, capacidade) VALUES
+('A1', 'A', 'CONVERSORES', 16),
+('A2', 'A', 'ELETRÔNICA', 16),
+('A3', 'A', 'CLP', 16),
+('A4', 'A', 'AUTOMAÇÃO', 20);
