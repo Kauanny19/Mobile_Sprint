@@ -90,40 +90,9 @@ export default function Homepage({ navigation }) {
         />
       </View>
 
-      {/* Search Bar */}
-      <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Pesquisar sala de aula"
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-        />
-      </View>
-
-      {/* Rooms Grid */}
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.roomsGrid}>
-          {rooms.map((room) => (
-            <TouchableOpacity
-              key={room.id}
-              style={styles.roomCard}
-              onPress={() => handleRoomSelect(room)}
-            >
-              <View style={styles.roomHeader}>
-                <Text style={styles.roomTitle}>{room.name}</Text>
-              </View>
-              <Text style={styles.roomTitle2}>
-                {" "}
-                Capacidade: {room.capacity}
-              </Text>
-              <Text style={styles.roomTitle2}> N° da sala: {room.number}</Text>
-              <View style={styles.roomContent}>
-                {/* Room content can be added here */}
-              </View>
-            </TouchableOpacity>
-          ))}
-        </View>
-      </ScrollView>
+      
+      <Text>Página inicial</Text>
+      
 
       {/* Footer */}
       <View style={styles.footer} />
