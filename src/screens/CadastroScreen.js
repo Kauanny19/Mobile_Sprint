@@ -9,6 +9,7 @@ import {
   Image,
 } from "react-native";
 import api from "../axios/axios";
+import Logo from "../../assets/logosenai.png";
 import { Ionicons } from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native"
 
@@ -41,7 +42,7 @@ export default function Cadastro() {
         <View style={styles.logoContainer}>
           <View style={styles.logoWrapper}>
             <Image
-              source={require("../../assets/logosenai.png")}
+              source={Logo}
               resizeMode="contain"
               style={{ width: "100%", height: undefined, aspectRatio: 4 }}
             />

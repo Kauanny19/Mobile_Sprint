@@ -1,13 +1,7 @@
 import React from "react";
 import {
   View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Alert,
   StyleSheet,
-  Button,
-  Image,
 } from "react-native";
 
 export default function MyLayout({ children }) {

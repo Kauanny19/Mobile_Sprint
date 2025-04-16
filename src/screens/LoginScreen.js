@@ -6,15 +6,11 @@ import {
   TouchableOpacity,
   Alert,
   StyleSheet,
-  Button,
   Image,
 } from "react-native";
 import api from "../axios/axios";
-
 import Logo from "../../assets/logosenai.png";
-
 import { Ionicons } from "@expo/vector-icons";
-
 import {useNavigation} from "@react-navigation/native"
 
 export default function Login() {
@@ -30,7 +26,7 @@ export default function Login() {
     await api.postLogin(user).then(
       (response) => {
         Alert.alert("OK", response.data.message);
-        navigation.navigate("Init");
+        navigation.navigate("Home");
       },
       (error) => {
         Alert.alert("Erro", error.response.data.error);
@@ -42,7 +38,7 @@ export default function Login() {
       <View style={styles.loginCard}>
         <View style={styles.logoContainer}>
           <Image
-            source={require("../../assets/logosenai.png")}
+            source={Logo}
             resizeMode="contain"
             style={{ width: "100%", height: undefined, aspectRatio: 4 }}
           />

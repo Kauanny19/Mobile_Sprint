@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import LoginScreen from "./screens/LoginScreen";
 import CadastroScreen from "./screens/CadastroScreen";
-import Init from "./screens/InitScreen";
+import Home from "./screens/Home";
 
 import Layout from "./components/MyLayout";
 
@@ -30,7 +30,7 @@ export default function App() {
             </Layout>
           )}
         />
-        <Stack.Screen name="Init" component={Init} />
+        <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
   );
