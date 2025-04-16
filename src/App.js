@@ -1,11 +1,10 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-
-import LoginScreen from "./screens/LoginScreen";
-import CadastroScreen from "./screens/CadastroScreen";
+import Login from "./screens/LoginScreen";
+import Cadastro from "./screens/CadastroScreen";
 import Home from "./screens/Home";
-
+import Reserva from "./screens/ReservaScreen";
 import Layout from "./components/MyLayout";
 
 const Stack = createStackNavigator();
@@ -13,12 +12,12 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown:false}}>
         <Stack.Screen
           name="Login"
           component={() => (
             <Layout>
-              <LoginScreen />
+              <Login />
             </Layout>
           )}
         />
@@ -26,11 +25,12 @@ export default function App() {
           name="Cadastro"
           component={() => (
             <Layout>
-              <CadastroScreen />
+              <Cadastro/>
             </Layout>
           )}
         />
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Reserva" component={Reserva}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

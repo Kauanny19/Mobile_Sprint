@@ -4,13 +4,12 @@ import {
   Text,
   StyleSheet,
   SafeAreaView,
-  Image,
   TextInput,
   ScrollView,
   TouchableOpacity,
 } from "react-native";
+import { FontAwesome } from '@expo/vector-icons';
 import api from "../axios/axios"
-import Logo from "../../assets/logosenai.png";
 
 export default function Home({ navigation }) {
   const [salas, setSalas] = useState([]);
@@ -19,6 +18,10 @@ export default function Home({ navigation }) {
     getSalas();
   }, []);
 
+  const handleSalaSelect = (sala) => {
+    console.log(`Selected sala: ${sala.descricao}`);
+    alert(`Sala selecionada: ${sala.descricao}`);
+  };
  
 async function getSalas(){
   try {
@@ -34,26 +37,24 @@ async function getSalas(){
       
       {/* Header */}
       <View style={styles.header}>
-        <Image
-          source={Logo}
-          resizeMode="contain"
-          style={styles.logo}
-        />
+        <FontAwesome name="user-circle-o" size={26} color="white" style={styles.icon}/>
+        <Text style={styles.text}>HOME</Text>
       </View>
+
+      
+      <ScrollView style={styles.scrollView}>
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
           placeholder="Pesquisar"
         />
       </View>
-
-      
-      <ScrollView style={styles.scrollView}>
         <View style={styles.roomsGrid}>
           {salas.map((sala) => (
             <TouchableOpacity
               key={sala.id_sala}
               style={styles.roomCard}
+              onPress={() => handleSalaSelect(sala)}
             >
               <View style={styles.roomHeader}>
                 <Text style={styles.roomTitle}>{sala.descricao}</Text>
@@ -83,15 +84,23 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF5F5",
   },
   header: {
+    flexDirection:"row",
     backgroundColor: "#CC1E1E",
     width: "100%",
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
+    height: 60,
+    alignItems: "flex-end",
+    justifyContent: "space-between",
   },
-  logo: {
-    width: 120,
-    height: 30,
+  icon:{
+    marginLeft:10,
+    marginBottom:7,
+  },
+  text:{
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 17,
+    marginRight: 15,
+    marginBottom:7,
   },
   searchContainer: {
     padding: 15,
