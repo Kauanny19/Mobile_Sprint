@@ -12,7 +12,30 @@ import {
 import api from "../axios/axios"
 import Logo from "../../assets/logosenai.png";
 
-export default function Reserva({ navigation }) {
+export default function Reserva({ route, navigation }) {
+  const { sala } = route.params;
+  const [horarios, setHorarios] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [horarioSelecionado, setHorarioSelecionado] = useState('');
+
+  useEffect(() => {
+    getHorarios();
+  });
+
+  return(
+    <View style={{paddingTop:30}}>
+      <Text style={{ fontSize: 18, padding: 10 }}>
+        Sala Selecionada: {sala.numero}
+      </Text>
+      <Text style={{ fontSize: 16, padding: 10 }}>
+        Descrição: {sala.descricao}
+      </Text>
+      <Text style={{ fontSize: 16, padding: 10 }}>
+        Capacidade: {sala.capacidade}
+      </Text>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -46,44 +69,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-  },
-  roomsGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    paddingHorizontal: 15,
-    paddingBottom: 70,
-  },
-  roomCard: {
-    backgroundColor: "white",
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#ddd",
-    width: "48%",
-    height: 130,
-    marginBottom: 15,
-    overflow: "hidden",
-  },
-  roomHeader: {
-    backgroundColor: "#CC1E1E",
-    padding: 8,
-  },
-  roomTitle: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 14,
-    padding: 2,
-  },
-  roomTitle2: {
-    color: "black",
-    fontWeight: "bold",
-    fontSize: 14,
-    padding: 2,
-    
-  },
-  roomContent: {
-    flex: 1,
-    padding: 10,
   },
   footer: {
     backgroundColor: "#CC1E1E",

@@ -3,14 +3,14 @@ import {
   View,
   StyleSheet,
 } from "react-native";
+import Header from "./Header";
 
 export default function MyLayout({ children }) {
     return (
 
       <View style={styles.container}>
 
-        {/* Cabeçalho */}
-        <View style={styles.header} />
+        <Header/>
 
         <View style={styles.container}>{children}</View>
   

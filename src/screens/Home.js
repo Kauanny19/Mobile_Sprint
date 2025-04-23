@@ -19,8 +19,7 @@ export default function Home({ navigation }) {
   }, []);
 
   const handleSalaSelect = (sala) => {
-    console.log(`Selected sala: ${sala.descricao}`);
-    alert(`Sala selecionada: ${sala.descricao}`);
+    navigation.navigate("Reserva",{sala})
   };
  
 async function getSalas(){
@@ -35,11 +34,7 @@ async function getSalas(){
   return (
     <SafeAreaView style={styles.container}>
       
-      {/* Header */}
-      <View style={styles.header}>
-        <FontAwesome name="user-circle-o" size={26} color="white" style={styles.icon}/>
-        <Text style={styles.text}>HOME</Text>
-      </View>
+      
 
       
       <ScrollView style={styles.scrollView}>
@@ -70,10 +65,7 @@ async function getSalas(){
           ))}
         </View>
       </ScrollView>
-      
-
-      {/* Footer */}
-      <View style={styles.footer} />
+    
     </SafeAreaView>
   );
 }

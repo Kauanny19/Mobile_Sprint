@@ -16,7 +16,7 @@ export default function App() {
         <Stack.Screen
           name="Login"
           component={() => (
-            <Layout>
+            <Layout header={1}>
               <Login />
             </Layout>
           )}
@@ -24,12 +24,12 @@ export default function App() {
         <Stack.Screen
           name="Cadastro"
           component={() => (
-            <Layout>
+            <Layout header={1}>
               <Cadastro/>
             </Layout>
           )}
         />
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Home" component={()=><Layout><Home/></Layout>} />
         <Stack.Screen name="Reserva" component={Reserva}/>
       </Stack.Navigator>
     </NavigationContainer>
