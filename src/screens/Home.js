@@ -8,10 +8,11 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import { FontAwesome } from '@expo/vector-icons';
-import api from "../axios/axios"
+import api from "../axios/axios";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Home({ navigation }) {
+export default function Home( ) {
+  const navigation = useNavigation();
   const [salas, setSalas] = useState([]);
 
   useEffect(() => {
@@ -19,31 +20,24 @@ export default function Home({ navigation }) {
   }, []);
 
   const handleSalaSelect = (sala) => {
-    navigation.navigate("Reserva",{sala})
+    navigation.navigate("Reserva", { sala:sala });
   };
- 
-async function getSalas(){
-  try {
-    const response = await api.getSalas();
-    console.log(response.data);
-    setSalas(response.data.salas);
-  } catch (error) {
-    console.log(error.response.data.error);
+
+  async function getSalas() {
+    try {
+      const response = await api.getSalas();
+      console.log(response.data);
+      setSalas(response.data.salas);
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
   }
-}
   return (
     <SafeAreaView style={styles.container}>
-      
-      
-
-      
       <ScrollView style={styles.scrollView}>
-      <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Pesquisar"
-        />
-      </View>
+        <View style={styles.searchContainer}>
+          <TextInput style={styles.searchInput} placeholder="Pesquisar" />
+        </View>
         <View style={styles.roomsGrid}>
           {salas.map((sala) => (
             <TouchableOpacity
@@ -59,13 +53,11 @@ async function getSalas(){
                 Capacidade: {sala.capacidade}
               </Text>
               <Text style={styles.roomTitle2}> N° da sala: {sala.numero}</Text>
-              <View style={styles.roomContent}>
-              </View>
+              <View style={styles.roomContent}></View>
             </TouchableOpacity>
           ))}
         </View>
       </ScrollView>
-    
     </SafeAreaView>
   );
 }
@@ -76,23 +68,23 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF5F5",
   },
   header: {
-    flexDirection:"row",
+    flexDirection: "row",
     backgroundColor: "#CC1E1E",
     width: "100%",
     height: 60,
     alignItems: "flex-end",
     justifyContent: "space-between",
   },
-  icon:{
-    marginLeft:10,
-    marginBottom:7,
+  icon: {
+    marginLeft: 10,
+    marginBottom: 7,
   },
-  text:{
+  text: {
     color: "white",
     fontWeight: "bold",
     fontSize: 17,
     marginRight: 15,
-    marginBottom:7,
+    marginBottom: 7,
   },
   searchContainer: {
     padding: 15,
@@ -142,7 +134,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 14,
     padding: 2,
-    
   },
   roomContent: {
     flex: 1,

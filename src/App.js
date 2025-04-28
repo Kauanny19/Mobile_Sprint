@@ -30,7 +30,7 @@ export default function App() {
           )}
         />
         <Stack.Screen name="Home" component={()=><Layout><Home/></Layout>} />
-        <Stack.Screen name="Reserva" component={Reserva}/>
+        <Stack.Screen name="Reserva" component={(props)=><Layout><Reserva {...props} /></Layout>}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
