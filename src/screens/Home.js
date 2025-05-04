@@ -31,6 +31,7 @@ export default function Home( ) {
     } catch (error) {
       console.log(error.response.data.error);
     }
+    
   }
   return (
     <SafeAreaView style={styles.container}>
