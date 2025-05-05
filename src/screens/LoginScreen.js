@@ -11,7 +11,7 @@ import {
 import api from "../axios/axios";
 import Logo from "../../assets/logosenai.png";
 import { Ionicons } from "@expo/vector-icons";
-import {useNavigation} from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native";
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -20,7 +20,7 @@ export default function Login() {
     showPassword: true,
   });
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   async function handleLogin() {
     await api.postLogin(user).then(

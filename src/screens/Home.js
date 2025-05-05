@@ -7,11 +7,12 @@ import {
   TextInput,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import api from "../axios/axios";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Home( ) {
+export default function Home() {
   const navigation = useNavigation();
   const [salas, setSalas] = useState([]);
 
@@ -20,18 +21,19 @@ export default function Home( ) {
   }, []);
 
   const handleSalaSelect = (sala) => {
-    navigation.navigate("Reserva", { sala:sala });
+    navigation.navigate("Reserva", { sala: sala });
   };
 
   async function getSalas() {
-    try {
-      const response = await api.getSalas();
-      console.log(response.data);
-      setSalas(response.data.salas);
-    } catch (error) {
-      console.log(error.response.data.error);
-    }
-    
+    await api.getSalas().then(
+      (response) => {
+        console.log(response.data);
+        setSalas(response.data.salas);
+      },
+      (error) => {
+        Alert.alert("Erro", error.response.data.error);
+      }
+    );
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -50,11 +52,9 @@ export default function Home( ) {
                 <Text style={styles.roomTitle}>{sala.descricao}</Text>
               </View>
               <Text style={styles.roomTitle2}>
-                {" "}
                 Capacidade: {sala.capacidade}
               </Text>
               <Text style={styles.roomTitle2}> N° da sala: {sala.numero}</Text>
-              <View style={styles.roomContent}></View>
             </TouchableOpacity>
           ))}
         </View>
@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "space-between",
     paddingHorizontal: 15,
-    paddingBottom: 70,
   },
   roomCard: {
     backgroundColor: "white",
@@ -135,10 +134,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 14,
     padding: 2,
-  },
-  roomContent: {
-    flex: 1,
-    padding: 10,
   },
   footer: {
     backgroundColor: "#CC1E1E",
