@@ -58,6 +58,12 @@ export default function Home() {
             </TouchableOpacity>
           ))}
         </View>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Login")}
+          style={styles.sairButton}
+        >
+          <Text>Sair</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
@@ -67,14 +73,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF5F5",
-  },
-  header: {
-    flexDirection: "row",
-    backgroundColor: "#CC1E1E",
-    width: "100%",
-    height: 60,
-    alignItems: "flex-end",
-    justifyContent: "space-between",
   },
   icon: {
     marginLeft: 10,
@@ -135,11 +133,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     padding: 2,
   },
-  footer: {
-    backgroundColor: "#CC1E1E",
-    width: "100%",
-    height: 50,
-    position: "absolute",
-    bottom: 0,
+  sairButton: {
+    width: "90%",
+    height: 30,
+    borderRadius: 3,
+    backgroundColor: "#FF3F3F",
+    margin: 20,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
