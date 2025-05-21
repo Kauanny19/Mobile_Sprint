@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import api from "../axios/axios";
 import { useNavigation } from "@react-navigation/native";
+import * as SecureStore from 'expo-secure-store';
 
 export default function Home() {
   const navigation = useNavigation();
@@ -19,16 +20,22 @@ export default function Home() {
   useEffect(() => {
     getSalas();
   }, []);
-
+  
   const handleSalaSelect = (sala) => {
     navigation.navigate("Reserva", { sala: sala });
+  };
+
+  const getSecureData = async () => {
+    const value = await SecureStore.getItemAsync('id');
+    console.log(value);
   };
 
   async function getSalas() {
     await api.getSalas().then(
       (response) => {
-        console.log(response.data);
+        //console.log(response.data);
         setSalas(response.data.salas);
+        getSecureData();
       },
       (error) => {
         Alert.alert("Erro", error.response.data.error);

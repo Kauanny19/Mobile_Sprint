@@ -23,23 +23,31 @@ export default function Login() {
 
   const navigation = useNavigation();
 
-  async function saveToken(token){
-    await SecureStore.setItemAsync("token", token);
-    console.log(token);
-  }
-
-  async function handleLogin() {
-    await api.postLogin(user).then(
-      (response) => {
-        Alert.alert("OK", response.data.message);
-        saveToken(response.data.token)
-        navigation.navigate("Home");
-      },
-      (error) => {
+  const saveInfos = async (token, id_usuario) => {
+    try {
+      await SecureStore.setItemAsync("token", token);
+      await SecureStore.setItemAsync("id", id_usuario.toString());
+    } catch (error) {
+      console.log("Erro ao salvar no SecureStore:", error);
+    }
+  };
+  
+  const handleLogin = async () => {
+    try {
+      const response = await api.postLogin(user);
+      await saveInfos(response.data.token, response.data.user.id_usuario);
+      Alert.alert("Sucesso", response.data.message);
+      navigation.navigate("Home");
+    } catch (error) {
+      console.log("Erro no login:", error);
+      if (error.response.data.error) {
         Alert.alert("Erro", error.response.data.error);
+      } else {
+        Alert.alert("Erro", "Erro ao conectar com o servidor.");
       }
-    );
-  }
+    }
+  };
+  
   return (
     <View style={styles.content}>
       <View style={styles.loginCard}>
