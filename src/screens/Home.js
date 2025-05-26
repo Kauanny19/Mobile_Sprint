@@ -16,17 +16,21 @@ import * as SecureStore from 'expo-secure-store';
 export default function Home() {
   const navigation = useNavigation();
   const [salas, setSalas] = useState([]);
+  const [idUsuario, setIdUsuario] = useState(null);
+
 
   useEffect(() => {
     getSalas();
+    getSecureData();
   }, []);
   
   const handleSalaSelect = (sala) => {
-    navigation.navigate("Reserva", { sala: sala });
+    navigation.navigate("Reserva", { sala: sala, idUsuario: idUsuario });
   };
 
   const getSecureData = async () => {
     const value = await SecureStore.getItemAsync('id');
+    setIdUsuario(value);
     console.log(value);
   };
 

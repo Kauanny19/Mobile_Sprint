@@ -12,10 +12,9 @@ import {
 import api from "../axios/axios";
 import { useNavigation } from "@react-navigation/native";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import * as SecureStore from 'expo-secure-store';
 
 export default function Reserva({ route }) {
-  const { sala } = route.params;
+  const { sala, idUsuario } = route.params;
   const navigation = useNavigation();
   const [disponiveis, setDisponiveis] = useState([]);
   const [reservados, setReservados] = useState([]);
@@ -29,10 +28,6 @@ export default function Reserva({ route }) {
       getHorarios(data);
     }
   }, [data]);
-  async function saveId(id_usuario){
-    await SecureStore.setItemAsync("id", id_usuario);
-    console.log(id_usuario);
-  }
 
   async function getHorarios(selectedDate) {
     await api.getHorarios({ id_sala: sala.id_sala, data: selectedDate }).then(
