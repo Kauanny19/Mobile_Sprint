@@ -24,6 +24,8 @@ const sheets = {
     getSalas:(sala) => api.get("/sala", sala),
     getHorarios: ({ id_sala, data }) => api.get(`/reserva/horarios/${id_sala}/${data}`),
     confirmarReserva:(reserva) => api.post("reserva", reserva),
+    getUser: (id) => api.get(`/user/${id}`),
+    updateUser:(user) => api.put("/user",user),
 
 }
 export default sheets;
