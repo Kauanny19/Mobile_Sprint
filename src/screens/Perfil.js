@@ -12,6 +12,7 @@ import imgPerfil from "../../assets/imgPerfil.png";
 import api from "../axios/axios";
 import { useNavigation } from "@react-navigation/native";
 import * as SecureStore from "expo-secure-store";
+import ModalAtualizarUser from "../components/ModalAtualizarUser";
 
 const Perfil = () => {
   const navigation = useNavigation();
@@ -26,7 +27,7 @@ const Perfil = () => {
 
   useEffect(() => {
     const getSecureData = async () => {
-      const value = await SecureStore.getItemAsync('id');
+      const value = await SecureStore.getItemAsync("id");
       setIdUsuario(value);
       if (value) {
         carregarDadosUsuario(value);
@@ -51,7 +52,8 @@ const Perfil = () => {
       console.log(error);
     }
   }
-  
+
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={styles.content}>
@@ -84,12 +86,15 @@ const Perfil = () => {
 
         <View style={styles.inputContainer}>
           <Text style={styles.label}>EMAIL</Text>
-          <TextInput
-            style={styles.input}
-            value={user.email}
-            editable={false}
-          />
+          <TextInput style={styles.input} value={user.email} editable={false} />
         </View>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => setModalVisible(true)}
+        >
+          <Text style={styles.buttonText}>Editar Perfil</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.button}
@@ -97,6 +102,18 @@ const Perfil = () => {
         >
           <Text style={styles.buttonText}>Minhas reservas</Text>
         </TouchableOpacity>
+
+        <ModalAtualizarUser
+          visible={modalVisible}
+          onClose={() => setModalVisible(false)}
+          usuario={{
+            nome: user.nome,
+            email: user.email,
+            senha: user.senha,
+            id_usuario: idUsuario,
+          }}
+          onSuccess={() => carregarDadosUsuario(idUsuario)}
+        />
       </View>
     </View>
   );

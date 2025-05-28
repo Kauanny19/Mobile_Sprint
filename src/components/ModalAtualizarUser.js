@@ -7,40 +7,48 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import api from "../services/axios";
+import api from "../axios/axios";
 
 const ModalAtualizarUser = ({ visible, onClose, usuario, onSuccess }) => {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [cpf, setCpf] = useState("");
 
   useEffect(() => {
     if (usuario) {
       setNome(usuario.nome || "");
       setEmail(usuario.email || "");
       setSenha(usuario.senha || "");
+      setCpf(usuario.cpf || "");
     }
   }, [usuario]);
 
-  const handleAtualizar = async () => {
-    try {
-      const dadosAtualizados = {
+
+  async function handleAtualizar() {
+     const dadosAtualizados = {
         nome,
         email,
         senha,
+        cpf
       };
 
-      const response = await api.updateUser(usuario.id_usuario, dadosAtualizados);
-
-      console.log(response.data.message);
-
-      if (onSuccess) onSuccess(); 
-
-      onClose();
-    } catch (error) {
-      console.error("Erro ao atualizar usuário:", error);
-    }
-  };
+      await api.updateUser({
+        id: usuario.id_usuario,
+        cpf: dadosAtualizados.cpf,
+        nome: dadosAtualizados.nome,
+        email: dadosAtualizados.email,
+        senha: dadosAtualizados.senha
+      }).then(
+        () =>{
+          onClose()
+        },
+        (error) => {
+          Alert.alert("Erro", error.response?.data?.error || "Erro ao atualizar");
+          console.log(error);
+        }
+      )
+  }
 
   if (!usuario) return null;
 
@@ -50,6 +58,13 @@ const ModalAtualizarUser = ({ visible, onClose, usuario, onSuccess }) => {
         <View style={styles.modalContainer}>
           <Text style={styles.title}>Atualizar Dados do Usuário</Text>
 
+          <Text style={styles.label}>CPF</Text>
+          <TextInput
+            style={styles.input}
+            value={cpf}
+            OnChangeText={setCpf}
+            placeholder="Digite seu nome"
+          />
           <Text style={styles.label}>Nome</Text>
           <TextInput
             style={styles.input}
