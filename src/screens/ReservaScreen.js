@@ -32,8 +32,10 @@ export default function Reserva({ route }) {
   async function getHorarios(selectedDate) {
     await api.getHorarios({ id_sala: sala.id_sala, data: selectedDate }).then(
       (response) => {
-        setDisponiveis(response.data.horariosDisponiveis);
-        setReservados(response.data.horariosIndisponiveis);
+        setDisponiveis(response.data.horarios.Disponiveis);
+        setReservados(response.data.horarios.Indisponiveis);
+        console.log(disponiveis);
+        console.log(reservados)
       },
       (error) => {
         Alert.alert("Erro", error.response.data.error);
@@ -63,7 +65,7 @@ export default function Reserva({ route }) {
 
     await api
       .confirmarReserva({
-        id_usuario: 1,
+        id_usuario: idUsuario,
         fk_id_sala: sala.id_sala,
         data: data,
         horarioInicio: inicio,
