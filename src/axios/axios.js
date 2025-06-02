@@ -11,8 +11,9 @@ const api = axios.create({
 api.interceptors.request.use(
     async (config) =>{
         const token = await SecureStore.getItemAsync("token");
+        console.log("Token sendo enviado:", token);
         if (token){
-        config.headers.Authorization = `${token}`;
+        config.headers.Authorization = token;
         }
         return config;
     },(error) => Promise.reject(error)
@@ -25,7 +26,7 @@ const sheets = {
     getHorarios: ({ id_sala, data }) => api.get(`/reserva/horarios/${id_sala}/${data}`),
     confirmarReserva:(reserva) => api.post("reserva", reserva),
     getUser: (id) => api.get(`/user/${id}`),
-    updateUser:(user) => api.put("/user",user),
+    updateUser:(user) => api.put(`/user`, user),
 
 }
 export default sheets;

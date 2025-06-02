@@ -110,6 +110,7 @@ const Perfil = () => {
             nome: user.nome,
             email: user.email,
             senha: user.senha,
+            cpf: user.cpf,
             id_usuario: idUsuario,
           }}
           onSuccess={() => carregarDadosUsuario(idUsuario)}
