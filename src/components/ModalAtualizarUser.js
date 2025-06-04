@@ -80,7 +80,6 @@ const ModalAtualizarUser = ({ visible, onClose, usuario, onSuccess }) => {
           <Text style={styles.label}>Senha</Text>
           <TextInput
             style={styles.input}
-            value={senha}
             onChangeText={setSenha}
             placeholder="Digite sua senha"
             keyboardType="password"

@@ -1,19 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import ModalConfirmacao from './ModalConfirmacao';
 
 export default function Menu({ visible, onClose }) {
   const navigation = useNavigation();
+  const [confirmVisible, setConfirmVisible] = useState(false);
 
   const handleNavigate = (screen) => {
-    onClose();
-    navigation.navigate(screen);
+    onClose(); 
+    navigation.navigate(screen); 
+  };
+
+  const abrirModal = () => {
+    setConfirmVisible(true);
+  };
+
+  const confirmar = () => {
+    setConfirmVisible(false);
+    handleNavigate('Login');
+  };
+
+  const cancelar = () => {
+    setConfirmVisible(false);
   };
 
   return (
     <Modal transparent={true} visible={visible} animationType="slide">
       <View style={styles.overlay}>
         <View style={styles.menu}>
+          <TouchableOpacity onPress={() => handleNavigate('Perfil')}>
+            <Text style={styles.item}>Perfil</Text>
+          </TouchableOpacity>
+
           <TouchableOpacity onPress={() => handleNavigate('Home')}>
             <Text style={styles.item}>Home</Text>
           </TouchableOpacity>
@@ -22,12 +41,17 @@ export default function Menu({ visible, onClose }) {
             <Text style={styles.item}>Minhas Reservas</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => handleNavigate('Perfil')}>
-            <Text style={styles.item}>Perfil</Text>
+          <TouchableOpacity onPress={abrirModal}>
+            <Text style={styles.item}>Sair</Text>
           </TouchableOpacity>
         </View>
-        
+
         <TouchableOpacity style={styles.closeArea} onPress={onClose} />
+        <ModalConfirmacao
+          visible={confirmVisible}
+          onConfirm={confirmar}
+          onCancel={cancelar}
+        />
       </View>
     </Modal>
   );
@@ -60,4 +84,5 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingVertical: 10,
   },
+  
 });

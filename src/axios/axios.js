@@ -11,7 +11,6 @@ const api = axios.create({
 api.interceptors.request.use(
     async (config) =>{
         const token = await SecureStore.getItemAsync("token");
-        console.log("Token sendo enviado:", token);
         if (token){
         config.headers.Authorization = token;
         }
@@ -27,6 +26,8 @@ const sheets = {
     confirmarReserva:(reserva) => api.post("reserva", reserva),
     getUser: (id) => api.get(`/user/${id}`),
     updateUser:(user) => api.put(`/user`, user),
+    deleteReserva: (id) => api.delete(`/reserva/${id}`),
+    getReservasPorUsuario: (id) => api.get(`/reserva/usuario/${id}`),
 
 }
 export default sheets;
