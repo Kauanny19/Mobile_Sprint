@@ -20,7 +20,7 @@ const Perfil = () => {
     nome: "",
     email: "",
     cpf: "",
-    senha: "",
+    senha: ""
   });
 
   const [idUsuario, setIdUsuario] = useState(null);

@@ -35,6 +35,7 @@ const ModalAtualizarUser = ({ visible, onClose, usuario, onSuccess }) => {
         email,
         senha,
       });
+      Alert.alert("Sucesso", "Usuário atualizado com sucesso.");
       onSuccess();
       onClose();
     } catch (error) {
@@ -57,7 +58,6 @@ const ModalAtualizarUser = ({ visible, onClose, usuario, onSuccess }) => {
             style={styles.input}
             value={cpf}
             editable={false} // <- CPF não pode mais ser alterado
-            placeholder="Digite seu nome"
           />
 
           <Text style={styles.label}>Nome</Text>

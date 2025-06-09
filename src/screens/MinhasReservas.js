@@ -38,12 +38,11 @@ export default function MinhasReservas() {
   async function getReservas(idUsuario) {
     await api.getReservasPorUsuario(idUsuario).then(
       (response) => {
+        console.log(response.data)
         setReserva(response.data.reservas);
       },
       (error) => {
-        Alert.alert(
-          "Erro",
-          error.response?.data?.error || "Erro ao buscar reservas."
+        Alert.alert("Erro",error.response?.data?.error || "Erro ao buscar reservas."
         );
       }
     );

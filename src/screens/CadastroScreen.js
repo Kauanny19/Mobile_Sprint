@@ -71,6 +71,7 @@ export default function Cadastro() {
           style={styles.input}
           placeholder="CPF"
           value={user.cpf}
+          maxLength={11}
           onChangeText={(value) => {
             setUser({ ...user, cpf: value });
           }}
