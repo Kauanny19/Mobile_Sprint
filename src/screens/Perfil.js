@@ -13,6 +13,7 @@ import api from "../axios/axios";
 import { useNavigation } from "@react-navigation/native";
 import * as SecureStore from "expo-secure-store";
 import ModalAtualizarUser from "../components/ModalAtualizarUser";
+import ModalExcluirUser from "../components/ModalExcluirUser";
 
 const Perfil = () => {
   const navigation = useNavigation();
@@ -20,7 +21,7 @@ const Perfil = () => {
     nome: "",
     email: "",
     cpf: "",
-    senha: ""
+    senha: "",
   });
 
   const [idUsuario, setIdUsuario] = useState(null);
@@ -53,7 +54,8 @@ const Perfil = () => {
     }
   }
 
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalAtualizarVisible, setModalAtualizarVisible] = useState(false);
+  const [modalExcluirVisible, setModalExcluirVisible] = useState(false);
 
   return (
     <View style={styles.content}>
@@ -91,7 +93,7 @@ const Perfil = () => {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => setModalVisible(true)}
+          onPress={() => setModalAtualizarVisible(true)}
         >
           <Text style={styles.buttonText}>Editar Perfil</Text>
         </TouchableOpacity>
@@ -103,9 +105,16 @@ const Perfil = () => {
           <Text style={styles.buttonText}>Minhas reservas</Text>
         </TouchableOpacity>
 
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => setModalExcluirVisible(true)}
+        >
+          <Text style={styles.buttonText}>Excluir</Text>
+        </TouchableOpacity>
+
         <ModalAtualizarUser
-          visible={modalVisible}
-          onClose={() => setModalVisible(false)}
+          visible={modalAtualizarVisible}
+          onClose={() => setModalAtualizarVisible(false)}
           usuario={{
             nome: user.nome,
             email: user.email,
@@ -114,6 +123,23 @@ const Perfil = () => {
             id_usuario: idUsuario,
           }}
           onSuccess={() => carregarDadosUsuario(idUsuario)}
+        />
+
+        <ModalExcluirUser
+          visible={modalExcluirVisible}
+          onClose={() => setModalExcluirVisible(false)}
+          onCancel={() => setModalExcluirVisible(false)}
+          onDeleted={() => {
+            setModalExcluirVisible(false);
+            navigation.navigate("Perfil")
+          }}
+          usuario={{
+            idUsuario: idUsuario,
+            nome: user.nome,
+            email: user.email,
+            senha: user.senha,
+            cpf: user.cpf,
+          }}
         />
       </View>
     </View>
@@ -132,7 +158,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#CC1E1E",
     width: "90%",
     borderRadius: 10,
-    padding: 20,
+    paddingVertical: 30,
+    paddingHorizontal: 20,
     alignItems: "center",
   },
   title: {
@@ -144,11 +171,11 @@ const styles = StyleSheet.create({
   imgPerfilContainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginVertical: 15,
+    marginVertical: 10,
   },
   name: {
     color: "white",
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: "bold",
     marginTop: 10,
   },
@@ -158,20 +185,23 @@ const styles = StyleSheet.create({
   },
   label: {
     color: "white",
+    fontSize: 12,
     marginBottom: 5,
+    marginLeft: 10,
   },
   input: {
     width: "100%",
     height: 45,
     backgroundColor: "white",
-    borderRadius: 25,
+    borderRadius: 20,
     paddingHorizontal: 15,
+    fontSize: 14,
   },
   button: {
     width: "100%",
     height: 45,
     backgroundColor: "white",
-    borderRadius: 25,
+    borderRadius: 20,
     marginTop: 15,
     justifyContent: "center",
     alignItems: "center",
@@ -182,5 +212,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
 
 export default Perfil;
