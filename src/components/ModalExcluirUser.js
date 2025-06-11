@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
+import {useNavigation} from "@react-navigation/native"
 import api from "../axios/axios";
 
 const ModalExcluirUser = ({ visible, usuario, onCancel, onDeleted, onClose }) => {
@@ -15,6 +16,8 @@ const ModalExcluirUser = ({ visible, usuario, onCancel, onDeleted, onClose }) =>
       console.log("Usuário para excluir:", usuario);
     }
   }, [usuario]);
+
+  const navigation = useNavigation();
 
   const handleExcluirUser = async () => {
     const id = usuario?.idUsuario;
@@ -27,6 +30,7 @@ const ModalExcluirUser = ({ visible, usuario, onCancel, onDeleted, onClose }) =>
       Alert.alert("Sucesso", "Usuário deletado com sucesso.");
       onDeleted?.();
       onClose?.();
+      navigation.navigate("Login");
     } catch (error) {
       console.log("Erro ao deletar:", error);
       Alert.alert(
