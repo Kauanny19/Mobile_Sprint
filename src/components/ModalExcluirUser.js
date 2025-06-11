@@ -23,7 +23,6 @@ const ModalExcluirUser = ({ visible, usuario, onCancel, onDeleted, onClose }) =>
       return;
     }
     try {
-      console.log("Deletando usuário com ID:", id);
       await api.deleteUser(id); // Verifique se esse endpoint existe no seu api.js
       Alert.alert("Sucesso", "Usuário deletado com sucesso.");
       onDeleted?.();
@@ -44,7 +43,7 @@ const ModalExcluirUser = ({ visible, usuario, onCancel, onDeleted, onClose }) =>
       <View style={styles.overlay}>
         <View style={styles.container}>
           <Text style={styles.title}>
-            Deseja realmente excluir este usuário?
+            Deseja realmente excluir sua conta?
           </Text>
           <View style={styles.buttons}>
             <TouchableOpacity style={styles.button} onPress={onCancel}>
