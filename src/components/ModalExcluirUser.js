@@ -47,14 +47,14 @@ const ModalExcluirUser = ({ visible, usuario, onCancel, onDeleted, onClose }) =>
       <View style={styles.overlay}>
         <View style={styles.container}>
           <Text style={styles.title}>
-            Deseja realmente excluir sua conta?
+            Deseja realmente deletar sua conta?
           </Text>
           <View style={styles.buttons}>
             <TouchableOpacity style={styles.button} onPress={onCancel}>
               <Text style={styles.cancelText}>Cancelar</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleExcluirUser}>
-              <Text style={styles.confirmText}>Excluir</Text>
+              <Text style={styles.confirmText}>Deletar</Text>
             </TouchableOpacity>
           </View>
         </View>

@@ -51,7 +51,7 @@ const ModalAtualizarUser = ({ visible, onClose, usuario, onSuccess }) => {
     <Modal visible={visible} transparent animationType="fade">
       <View style={styles.overlay}>
         <View style={styles.modalContainer}>
-          <Text style={styles.title}>Atualizar Dados do Usuário</Text>
+          <Text style={styles.title}>ATUALIZAR PERFIL</Text>
 
           <Text style={styles.label}>CPF</Text>
           <TextInput

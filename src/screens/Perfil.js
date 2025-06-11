@@ -93,13 +93,6 @@ const Perfil = () => {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => setModalAtualizarVisible(true)}
-        >
-          <Text style={styles.buttonText}>Editar Perfil</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
           onPress={() => navigation.navigate("MinhasReservas")}
         >
           <Text style={styles.buttonText}>Minhas reservas</Text>
@@ -107,9 +100,18 @@ const Perfil = () => {
 
         <TouchableOpacity
           style={styles.button}
+          onPress={() => setModalAtualizarVisible(true)}
+        >
+          <Text style={styles.buttonText}>Editar Perfil</Text>
+        </TouchableOpacity>
+
+        
+
+        <TouchableOpacity
+          style={styles.button}
           onPress={() => setModalExcluirVisible(true)}
         >
-          <Text style={styles.buttonText}>Excluir</Text>
+          <Text style={styles.buttonText}>Deletar Perfil</Text>
         </TouchableOpacity>
 
         <ModalAtualizarUser
